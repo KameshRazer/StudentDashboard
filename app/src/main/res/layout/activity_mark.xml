@@ -4,23 +4,136 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     tools:context=".MarkActivity">
 
+    <LinearLayout
+        android:translationX="-280dp"
+        android:id="@+id/mainmenu1"
+        android:orientation="vertical"
+        android:background="#1E2E61"
+        android:layout_width="280dp"
+        android:layout_height="match_parent">
 
-    <Spinner
-        android:id="@+id/select"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:entries="@array/selected"
-        android:padding="5dp" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/userpicbig1"
+            android:layout_marginTop="70dp"
+            android:layout_gravity="center"
+            android:src="@drawable/userpicbig"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <!--        android:entries="@array/selected"-->
+        <TextView
+            android:id="@+id/name1"
+            android:text="Name"
+            android:textColor="#FFF"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_marginTop="14dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/rollno1"
+            android:text="Roll No"
+            android:textColor="#FFF"
+            android:textStyle="normal"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:layout_marginTop="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/circular1"
+            android:gravity="left"
+            android:layout_marginLeft="44dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/bgbtnmenu"
+            android:textColor="#FFF"
+            android:textStyle="normal"
+            android:textSize="18sp"
+            android:textAllCaps="false"
+            android:text="Circulars"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/timetable1"
+            android:gravity="left"
+            android:layout_marginLeft="44dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/bgbtnmenu"
+            android:textColor="#4B577B"
+            android:textStyle="normal"
+            android:textSize="18sp"
+            android:textAllCaps="false"
+            android:text="Time Table"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/ecamp1"
+            android:gravity="left"
+            android:layout_marginLeft="44dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/bgbtnmenu"
+            android:textColor="#4B577B"
+            android:textStyle="normal"
+            android:textSize="18sp"
+            android:textAllCaps="false"
+            android:text="E-Campus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/so1"
+            android:gravity="left"
+            android:layout_marginLeft="44dp"
+            android:layout_marginTop="85dp"
+            android:background="@drawable/bgbtnmenu"
+            android:textColor="#4B577B"
+            android:textStyle="normal"
+            android:textSize="18sp"
+            android:textAllCaps="false"
+            android:text="Sign out"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
 
+    </LinearLayout>
+    <RelativeLayout
+        android:translationX="-280dp"
+        android:id="@+id/maincontent1"
+        android:layout_width="416dp"
+        android:layout_height="match_parent">
+        <Button
+            android:id="@+id/btnmenu1"
+            android:layout_width="115dp"
+            android:layout_height="111dp"
+            android:background="@drawable/userpic" />
+
+        <Spinner
+            android:id="@+id/select"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="90dp"
+            android:entries="@array/selected"
+            android:padding="5dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/select"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="29dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="0dp" />
+        <!--        android:entries="@array/selected"-->
+
+    </RelativeLayout>
 </LinearLayout>

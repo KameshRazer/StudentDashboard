@@ -23,7 +23,7 @@ public class home extends AppCompatActivity {
     RelativeLayout maincontent;
     LinearLayout mainmenu;
     Animation fromtop,frombottom;
-    ImageView userpicbig,marks;
+    ImageView userpicbig,marks,attendance;
     TextView name,rollno,nameHome,rollNoHome;
     String rollNo,userName,imageURL;
     SharedPreferences logInfo;
@@ -48,7 +48,7 @@ public class home extends AppCompatActivity {
         //ImageView
         userpicbig = findViewById(R.id.userpicbig);
         marks = findViewById(R.id.marks);
-
+        attendance = findViewById(R.id.attendance);
 
         logInfo = getSharedPreferences("LogInfo",MODE_PRIVATE);
         userName =  logInfo.getString("name","Error");
@@ -114,6 +114,13 @@ public class home extends AppCompatActivity {
                 Intent mark = new Intent(home.this,MarkActivity.class);
                 mark.putExtra("rollNo",rollNo);
                 startActivity(mark);
+            }
+        });
+
+        attendance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(home.this,AttendanceActivity.class));
             }
         });
     }

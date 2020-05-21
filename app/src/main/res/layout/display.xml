@@ -133,7 +133,4 @@
         android:visibility="gone"
         android:layout_toEndOf="@+id/title1" />
 
-
-
-
 </RelativeLayout>

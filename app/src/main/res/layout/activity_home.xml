@@ -16,7 +16,7 @@
         android:layout_width="280dp"
         android:layout_height="match_parent">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/userpicbig"
             android:layout_marginTop="70dp"
             android:layout_gravity="center"
@@ -114,9 +114,9 @@
 
         <Button
             android:id="@+id/btnmenu"
-            android:background="@drawable/userpic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="115dp"
+            android:layout_height="111dp"
+            android:background="@drawable/userpic" />
 
         <TextView
             android:id="@+id/userhome"
@@ -236,6 +236,7 @@
 
 
                 <ImageView
+                    android:id="@+id/attendance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"

@@ -39,14 +39,8 @@ public class MarkActivity extends AppCompatActivity {
     ArrayList<ArrayList<String>> dataList = new ArrayList<>();
     MarkAdapter markAdapter;
 
-    Button btnmenu,circular,timetable,ecamp,so;
-    RelativeLayout maincontent;
-    LinearLayout mainmenu;
-    Animation fromtop,frombottom;
-    ImageView userpicbig;
-    TextView name,rollno;
-    String rollNo,userName,imageURL;
-    SharedPreferences logInfo;
+    Button btnmenu;
+    String rollNo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,80 +62,29 @@ public class MarkActivity extends AppCompatActivity {
 
         //Button
         btnmenu =  findViewById(R.id.btnmenu1);
-        circular =  findViewById(R.id.circular1);
-        timetable =  findViewById(R.id.timetable1);
-        ecamp =  findViewById(R.id.ecamp1);
-        so =  findViewById(R.id.so1);
-
-        //TextView
-        name = findViewById(R.id.name1);
-        rollno = findViewById(R.id.rollno1);
-//        nameHome = findViewById(R.id.userhome);
 //        rollNoHome = findViewById(R.id.rollnohome);
-
-        //ImageView
-        userpicbig = findViewById(R.id.userpicbig1);
-//        marks = findViewById(R.id.marks);
-
-
-        logInfo = getSharedPreferences("LogInfo",MODE_PRIVATE);
-        userName =  logInfo.getString("name","Error");
-        rollNo = logInfo.getString("RollNo","Error");
-        imageURL = logInfo.getString("imageUrl","Error");
-
-//        dbRef = FirebaseDatabase.getInstance().getReference().child(rollNo);
-
-        fromtop = AnimationUtils.loadAnimation(this,R.anim.fromtop);
-        frombottom = AnimationUtils.loadAnimation(this,R.anim.frombottom);
-
-        //Layout
-        maincontent =  findViewById(R.id.maincontent1);
-        mainmenu =  findViewById(R.id.mainmenu1);
-
-//        nameHome.setText(userName);
-//        rollNoHome.setText(rollNo);
-
-        Picasso.get().load(imageURL).resize(400,350).into(userpicbig);
-//        Picasso.with(home.this).load(imageURL)
-//                .resize(400,350)
-//                .into(userpicbig);
-
-        so.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                logInfo = getSharedPreferences("LogInfo",MODE_PRIVATE);
-                logInfo.edit().clear().apply();
-                startActivity(new Intent(MarkActivity.this,LoginActivity.class));
-            }
-        });
 
         btnmenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                name.setText(userName);
-                rollno.setText(rollNo);
-                maincontent.animate().translationX(0);
-                mainmenu.animate().translationX(0);
-
-                circular.startAnimation(frombottom);
-                timetable.startAnimation(frombottom);
-                ecamp.startAnimation(frombottom);
-                so.startAnimation(frombottom);
-
-                name.startAnimation(fromtop);
-                rollno.startAnimation(fromtop);
-                userpicbig.startAnimation(fromtop);
-//                System.out.println("Button clicked");
-
+                Intent mark = new Intent(MarkActivity.this,home.class);
+                mark.putExtra("rollNo",rollNo);
+                startActivity(mark);
             }
         });
-        maincontent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                maincontent.animate().translationX(-735);
-                mainmenu.animate().translationX(-735);
-            }
-        });
+
+
+
+//        dbRef = FirebaseDatabase.getInstance().getReference().child(rollNo);
+
+
+//        nameHome.setText(userName);
+//        rollNoHome.setText(rollNo);
+
+//        Picasso.with(home.this).load(imageURL)
+//                .resize(400,350)
+//                .into(userpicbig);
+
 
 
 
@@ -157,8 +100,8 @@ public class MarkActivity extends AppCompatActivity {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             String selected = parent.getSelectedItem().toString();
-
-            selected = "Marks/"+selected+"/"+rollNo;
+            selected = "Marks/"+rollNo.substring(0,4)+"/"+selected+"/"+rollNo;
+            //selected = "Marks/"+selected+"/"+rollNo;
 //            System.out.println(selected);
             dataList.clear();
             dbRef = FirebaseDatabase.getInstance().getReference().child(selected);

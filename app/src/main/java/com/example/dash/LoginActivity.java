@@ -40,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 rollNo = userId.getText().toString();
                 dbRef = FirebaseDatabase.getInstance().getReference().child("Student/"+rollNo.substring(0,4));
-                dbRef.addValueEventListener(new ValueEventListener() {
+                dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if(dataSnapshot.hasChild(rollNo))
@@ -58,6 +58,8 @@ public class LoginActivity extends AppCompatActivity {
                                 logInfo.edit().putString("name",name).apply();
                                 logInfo.edit().putString("imageUrl",imageUrl).apply();
 
+                                userId.setText("");
+                                userPassword.setText("");
                                 Intent home = new Intent(LoginActivity.this, home.class);
                                 startActivity(home);
                             }

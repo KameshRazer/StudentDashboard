@@ -9,4 +9,5 @@
         <item>Mini Project</item>
         <item>Total</item>
     </string-array>
+    <string name="channel_id">fcm001</string>
 </resources>

@@ -33,6 +33,8 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
 
+    //Messaging service
+    implementation 'com.google.firebase:firebase-messaging:20.1.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

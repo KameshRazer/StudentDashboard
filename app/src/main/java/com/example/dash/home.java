@@ -1,10 +1,15 @@
 package com.example.dash;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -13,7 +18,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.squareup.picasso.Picasso;
 
 
@@ -27,6 +39,8 @@ public class home extends AppCompatActivity {
     TextView name,rollno,nameHome,rollNoHome;
     String rollNo,userName,imageURL;
     SharedPreferences logInfo;
+    DatabaseReference dbRef;
+    String TAG ="Home";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +65,7 @@ public class home extends AppCompatActivity {
         attendance = findViewById(R.id.attendance);
         circularImage = findViewById(R.id.circularImage);
 
+        dbRef = FirebaseDatabase.getInstance().getReference().child("Student");
         logInfo = getSharedPreferences("LogInfo",MODE_PRIVATE);
         userName =  logInfo.getString("name","Error");
         rollNo = logInfo.getString("RollNo","Error");
@@ -76,7 +91,7 @@ public class home extends AppCompatActivity {
         so.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                logInfo = getSharedPreferences("LogInfo",MODE_PRIVATE);
+                dbRef.child(rollNo.substring(0,4)+"/"+rollNo+"/TokenId").setValue(null);
                 logInfo.edit().clear().apply();
                 startActivity(new Intent(home.this,LoginActivity.class));
             }
@@ -113,7 +128,6 @@ public class home extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent mark = new Intent(home.this,MarkActivity.class);
-                mark.putExtra("rollNo",rollNo);
                 startActivity(mark);
             }
         });
@@ -138,6 +152,28 @@ public class home extends AppCompatActivity {
                 startActivity(new Intent(home.this,CircularActivity.class));
             }
         });
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            String channelId  = getResources().getString(R.string.channel_id);
+            String channelName = getResources().getString(R.string.app_name);
+            NotificationManager notificationManager =
+                    getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(new NotificationChannel(channelId,
+                    channelName, NotificationManager.IMPORTANCE_LOW));
+        }
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "getInstanceId failed", task.getException());
+                            return;
+                        }
+
+                        // Get new Instance ID token
+                        String token = task.getResult().getToken();
+                        dbRef.child(rollNo.substring(0,4)+"/"+rollNo+"/TokenId").setValue(token);
+                    }
+                });
     }
 
 }

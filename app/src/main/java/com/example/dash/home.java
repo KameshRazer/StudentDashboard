@@ -35,7 +35,7 @@ public class home extends AppCompatActivity {
     RelativeLayout maincontent;
     LinearLayout mainmenu;
     Animation fromtop,frombottom;
-    ImageView userpicbig,marks,attendance,circularImage;
+    ImageView userpicbig,marks,attendance,circularImage,resultImage;
     TextView name,rollno,nameHome,rollNoHome;
     String rollNo,userName,imageURL;
     SharedPreferences logInfo;
@@ -64,6 +64,7 @@ public class home extends AppCompatActivity {
         marks = findViewById(R.id.marks);
         attendance = findViewById(R.id.attendance);
         circularImage = findViewById(R.id.circularImage);
+        resultImage = findViewById(R.id.result_image);
 
         dbRef = FirebaseDatabase.getInstance().getReference().child("Student");
         logInfo = getSharedPreferences("LogInfo",MODE_PRIVATE);
@@ -150,6 +151,12 @@ public class home extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(home.this,CircularActivity.class));
+            }
+        });
+        resultImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(home.this,TotalMarkActivity.class));
             }
         });
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

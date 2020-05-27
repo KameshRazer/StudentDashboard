@@ -35,6 +35,7 @@ public class MarkActivity extends AppCompatActivity {
 
     Spinner selected;
     RecyclerView recyclerView;
+    SharedPreferences logInfo;
 //    String rollNo;
     ArrayList<ArrayList<String>> dataList = new ArrayList<>();
     MarkAdapter markAdapter;
@@ -47,8 +48,8 @@ public class MarkActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mark);
 
-        Intent i = getIntent();
-        rollNo = i.getStringExtra("rollNo");
+        logInfo = getSharedPreferences("LogInfo",MODE_PRIVATE);
+        rollNo = logInfo.getString("RollNo","Error");
 
         selected =  findViewById(R.id.select);
         recyclerView = findViewById(R.id.recyclerView);
@@ -73,17 +74,6 @@ public class MarkActivity extends AppCompatActivity {
             }
         });
 
-
-
-//        dbRef = FirebaseDatabase.getInstance().getReference().child(rollNo);
-
-
-//        nameHome.setText(userName);
-//        rollNoHome.setText(rollNo);
-
-//        Picasso.with(home.this).load(imageURL)
-//                .resize(400,350)
-//                .into(userpicbig);
 
 
 

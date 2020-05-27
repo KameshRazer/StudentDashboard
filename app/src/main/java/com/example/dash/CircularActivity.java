@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -85,10 +86,11 @@ public class CircularActivity extends AppCompatActivity {
             return viewHolder;
         }
 
+        @SuppressLint("SetTextI18n")
         @Override
         public void onBindViewHolder(@NonNull CircularAdaper.ViewHolder holder, int position) {
             ArrayList<String> data = dataList.get(position);
-            holder.topic.setText(data.get(0));
+            holder.topic.setText((position + 1) +". "+data.get(0));
             holder.message.setText(data.get(1));
         }
 

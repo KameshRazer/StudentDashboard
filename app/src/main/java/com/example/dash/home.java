@@ -94,7 +94,7 @@ public class home extends AppCompatActivity {
             public void onClick(View v) {
                 dbRef.child(rollNo.substring(0,4)+"/"+rollNo+"/TokenId").setValue(null);
                 logInfo.edit().clear().apply();
-                startActivity(new Intent(home.this,LoginActivity.class));
+                startActivity(new Intent(home.this,FirstActivity.class));
             }
         });
 

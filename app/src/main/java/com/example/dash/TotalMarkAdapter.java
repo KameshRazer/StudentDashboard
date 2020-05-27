@@ -29,7 +29,9 @@ public class TotalMarkAdapter extends RecyclerView.Adapter<TotalMarkAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull TotalMarkAdapter.ViewHolder holder, int position) {
-
+        holder.result.setText(dataList.get(position).get(1));
+        holder.marks.setText(dataList.get(position).get(0));
+        holder.subject.setText(dataList.get(position).get(2));
     }
 
     @Override

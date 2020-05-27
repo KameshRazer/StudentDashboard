@@ -9,9 +9,11 @@
 
     <TextView
         android:id="@+id/textView10"
-        android:layout_width="220dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="Code / Subject Name"
+        android:layout_below="@+id/semester"
+        android:layout_marginTop="20dp"
         android:textSize="20sp"
         android:gravity="center_horizontal"/>
 
@@ -21,6 +23,8 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/textView10"
         android:textSize="20sp"
+        android:layout_below="@+id/semester"
+        android:layout_marginTop="20dp"
         android:gravity="center_horizontal"
         android:text="Marks" />
 
@@ -29,6 +33,8 @@
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/textView11"
+        android:layout_below="@+id/semester"
+        android:layout_marginTop="20dp"
         android:textSize="20sp"
         android:gravity="center_horizontal"
         android:text="Result" />
@@ -38,5 +44,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_below="@id/textView10"/>
+        android:layout_below="@id/textView10" />
+
+    <Spinner
+        android:id="@+id/semester"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"/>
 </RelativeLayout>

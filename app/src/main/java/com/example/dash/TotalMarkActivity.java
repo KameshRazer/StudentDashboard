@@ -1,12 +1,20 @@
 package com.example.dash;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -15,13 +23,18 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class TotalMarkActivity extends AppCompatActivity {
 
     SharedPreferences logInfo;
     RecyclerView recyclerView;
     DatabaseReference dbRef;
+    Spinner semester;
+    ProgressDialog progressDialog;
     ArrayList<ArrayList<String>> dataList = new ArrayList<>();
+    ArrayList<String> semArray = new ArrayList<>();
+    ArrayAdapter semAdapter;
     String rollNo;
     TotalMarkAdapter dataAdapter;
     @Override
@@ -29,28 +42,36 @@ public class TotalMarkActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_total_mark);
 
-        recyclerView = findViewById(R.id.atd_recyclerView);
+        recyclerView = findViewById(R.id.totalMarks_recyclerview);
+        semester = findViewById(R.id.semester);
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("LoAdInG...");
         logInfo = getSharedPreferences("LogInfo",MODE_PRIVATE);
         rollNo = logInfo.getString("RollNo","Error");
 
+//        semArray.add("Select");
         dataAdapter = new TotalMarkAdapter(dataList);
         recyclerView.setAdapter(dataAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        semAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,semArray);
+        semAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        semester.setAdapter(semAdapter);
+        semester.setOnItemSelectedListener(new CreateSemResult());
+
+        progressDialog.show();
         if(!rollNo.equals("Error")){
-            dbRef = FirebaseDatabase.getInstance().getReference().child("Attendance/"+rollNo.substring(0,4)+"/"+rollNo);
+            dbRef = FirebaseDatabase.getInstance().getReference().child("Marks/"+rollNo.substring(0,4)+"/Result/"+rollNo);
+            System.out.println(rollNo);
             dbRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     for(DataSnapshot ds : dataSnapshot.getChildren()){
-                        ArrayList<String> list = new ArrayList<>();
-                        list.add(ds.getKey());
-                        list.add(ds.child("Total Hours").getValue().toString());
-                        list.add(ds.child("Present").getValue().toString());
-                        dataList.add(list);
+                        semArray.add(ds.getKey());
+//                        System.out.println(semArray);
                     }
-                    dataAdapter.notifyDataSetChanged();
-
+                    semAdapter.notifyDataSetChanged();
+                    progressDialog.dismiss();
                 }
 
                 @Override
@@ -60,6 +81,44 @@ public class TotalMarkActivity extends AppCompatActivity {
             });
 
         }else{
+            Toast.makeText(getApplicationContext(),"Roll Number Error",Toast.LENGTH_LONG).show();
+            progressDialog.dismiss();
+        }
+    }
+    class CreateSemResult implements AdapterView.OnItemSelectedListener
+    {
+
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            progressDialog.show();
+            String selected = parent.getSelectedItem().toString();
+            dbRef = FirebaseDatabase.getInstance().getReference().child("Marks/"+rollNo.substring(0,4)+"/Result/"+rollNo+"/"+selected);
+            dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    dataList.clear();
+                    for(DataSnapshot code : dataSnapshot.getChildren()){
+                        ArrayList<String> list = new ArrayList<>();
+                        for(DataSnapshot ds : code.getChildren()){
+                            list.add(Objects.requireNonNull(ds.getValue()).toString());
+                        }
+                        dataList.add(list);
+//                        System.out.println("dataList : "+dataList);
+                    }
+                    dataAdapter.notifyDataSetChanged();
+                    progressDialog.dismiss();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
 
         }
     }

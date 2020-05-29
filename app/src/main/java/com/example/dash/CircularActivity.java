@@ -101,7 +101,7 @@ public class CircularActivity extends AppCompatActivity {
 
         class ViewHolder extends RecyclerView.ViewHolder{
             TextView topic,message;
-            public ViewHolder(@NonNull View itemView) {
+            ViewHolder(@NonNull View itemView) {
                 super(itemView);
                 topic = itemView.findViewById(R.id.topic);
                 message = itemView.findViewById(R.id.circularMessage);

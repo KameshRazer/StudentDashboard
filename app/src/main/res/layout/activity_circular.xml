@@ -5,15 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CircularActivity">
-
+    <Button
+        android:id="@+id/back3"
+        android:layout_width="115dp"
+        android:layout_height="111dp"
+        android:background="@drawable/left" />
     <TextView
         android:id="@+id/textView9"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/colorPrimaryDark"
         android:gravity="center"
         android:textSize="30sp"
-        android:text="Circular" />
+        android:text="Circulars" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/circularView"

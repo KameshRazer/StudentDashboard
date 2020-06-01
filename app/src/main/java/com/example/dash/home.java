@@ -7,6 +7,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,16 +32,17 @@ import com.squareup.picasso.Picasso;
 
 public class home extends AppCompatActivity {
 
-    Button btnmenu,circular,timetable,ecamp,so;
+    Button btnmenu,circular,ecamp,so;
     RelativeLayout maincontent;
     LinearLayout mainmenu;
     Animation fromtop,frombottom;
-    ImageView userpicbig,marks,attendance,circularImage,resultImage;
+    ImageView userpicbig,marks,attendance,circularImage,ctt,resultImage;
     TextView name,rollno,nameHome,rollNoHome;
     String rollNo,userName,imageURL;
     SharedPreferences logInfo;
     DatabaseReference dbRef;
     String TAG ="Home";
+    Boolean isLogged;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +51,7 @@ public class home extends AppCompatActivity {
         //Button
         btnmenu =  findViewById(R.id.btnmenu);
         circular =  findViewById(R.id.circular);
-        timetable =  findViewById(R.id.timetable);
+
         ecamp =  findViewById(R.id.ecamp);
         so =  findViewById(R.id.so);
 
@@ -65,12 +67,17 @@ public class home extends AppCompatActivity {
         attendance = findViewById(R.id.attendance);
         circularImage = findViewById(R.id.circularImage);
         resultImage = findViewById(R.id.result_image);
+        ctt=findViewById(R.id.ctt);
 
         dbRef = FirebaseDatabase.getInstance().getReference().child("Student");
         logInfo = getSharedPreferences("LogInfo",MODE_PRIVATE);
         userName =  logInfo.getString("name","Error");
         rollNo = logInfo.getString("RollNo","Error");
         imageURL = logInfo.getString("imageUrl","Error");
+        isLogged = logInfo.getBoolean("isLogged",false);
+        if(!isLogged)
+            startActivity(new Intent(home.this,FirstActivity.class));
+
 
 //        dbRef = FirebaseDatabase.getInstance().getReference().child(rollNo);
 
@@ -98,6 +105,15 @@ public class home extends AppCompatActivity {
             }
         });
 
+        ecamp.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View arg0) {
+                Intent viewIntent =
+                        new Intent("android.intent.action.VIEW",
+                                Uri.parse("https://ecampus.psgtech.ac.in/studzone2/"));
+                startActivity(viewIntent);
+            }
+        });
+
         btnmenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,7 +123,7 @@ public class home extends AppCompatActivity {
                 mainmenu.animate().translationX(0);
 
                 circular.startAnimation(frombottom);
-                timetable.startAnimation(frombottom);
+
                 ecamp.startAnimation(frombottom);
                 so.startAnimation(frombottom);
 
@@ -129,6 +145,14 @@ public class home extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent mark = new Intent(home.this,MarkActivity.class);
+                startActivity(mark);
+            }
+        });
+
+        ctt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mark = new Intent(home.this,class_time_table.class);
                 startActivity(mark);
             }
         });

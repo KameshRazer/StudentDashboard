@@ -11,8 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-        android:textAlignment="center"
+        android:textAlignment="textStart"
         android:text="TextView"
+        android:textColor="@color/colorPrimaryDark"
         android:gravity="center_horizontal" />
 
     <TextView

@@ -35,7 +35,7 @@ public class home extends AppCompatActivity {
     RelativeLayout maincontent;
     LinearLayout mainmenu;
     Animation fromtop,frombottom;
-    ImageView userpicbig,marks,attendance,circularImage,ctt,resultImage;
+    ImageView userpicbig,marks,attendance,circularImage,ctt,resultImage,testTimeTableImage;
     TextView name,rollno,nameHome,rollNoHome;
     String rollNo,userName,imageURL;
     SharedPreferences logInfo;
@@ -67,6 +67,7 @@ public class home extends AppCompatActivity {
         circularImage = findViewById(R.id.circularImage);
         resultImage = findViewById(R.id.result_image);
         ctt=findViewById(R.id.ctt);
+        testTimeTableImage = findViewById(R.id.test_time_table_image);
 
         dbRef = FirebaseDatabase.getInstance().getReference().child("Student");
         logInfo = getSharedPreferences("LogInfo",MODE_PRIVATE);
@@ -167,6 +168,13 @@ public class home extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(home.this,CircularActivity.class));
+            }
+        });
+
+        testTimeTableImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(home.this,TestTimeTable.class));
             }
         });
 

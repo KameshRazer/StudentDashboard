@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".class_time_table"></activity>
+        <activity android:name=".TestTimeTable"></activity>
+        <activity android:name=".class_time_table" />
         <activity android:name=".TotalMarkActivity" />
         <activity android:name=".CircularActivity" />
         <activity android:name=".AttendanceActivity" />

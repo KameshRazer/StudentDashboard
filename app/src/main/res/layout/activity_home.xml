@@ -243,6 +243,7 @@
                     android:textSize="16sp" />
 
                 <ImageView
+                    android:id="@+id/test_time_table_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"

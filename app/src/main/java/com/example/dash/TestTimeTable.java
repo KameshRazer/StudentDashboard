@@ -4,11 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
@@ -31,6 +33,7 @@ public class TestTimeTable extends AppCompatActivity {
     ArrayAdapter timeTableAdapter;
     String rollNo;
     DatabaseReference dbRef;
+    Button back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +42,14 @@ public class TestTimeTable extends AppCompatActivity {
         timeTable = findViewById(R.id.test_time_table);
         img_timeTable = findViewById(R.id.test_image);
 
+        back= findViewById(R.id.back6);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mark = new Intent(TestTimeTable.this,home.class);
+                startActivity(mark);
+            }
+        });
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Loading...");
         progressDialog.show();

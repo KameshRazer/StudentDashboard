@@ -80,7 +80,8 @@ public class TestTimeTable extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         String timeTable = dataSnapshot.child(selected).getValue().toString();
-                        Picasso.get().load(timeTable).resize(344, 444).into(img_timeTable);
+                        Picasso.get().load(timeTable).resize(5000, 5000).into(img_timeTable);
+                        progressDialog.dismiss();
                     }
 
                     @Override

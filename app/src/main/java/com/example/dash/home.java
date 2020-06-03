@@ -225,5 +225,14 @@ public class home extends AppCompatActivity {
                     });
         }
     }
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+//        System.out.println("Login onRestart invoked");
+        //Checking previous Login
+        if(!logInfo.getBoolean("isLogged",false)){
+            finishAffinity();
+        }
+    }
 
 }

@@ -208,20 +208,22 @@ public class home extends AppCompatActivity {
             notificationManager.createNotificationChannel(new NotificationChannel(channelId,
                     channelName, NotificationManager.IMPORTANCE_LOW));
         }
-        FirebaseInstanceId.getInstance().getInstanceId()
-                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                        if (!task.isSuccessful()) {
-                            Log.w(TAG, "getInstanceId failed", task.getException());
-                            return;
-                        }
+        if(!rollNo.equals("Error")) {
+            FirebaseInstanceId.getInstance().getInstanceId()
+                    .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                            if (!task.isSuccessful()) {
+                                Log.w(TAG, "getInstanceId failed", task.getException());
+                                return;
+                            }
 
-                        // Get new Instance ID token
-                        String token = task.getResult().getToken();
-                        dbRef.child(rollNo.substring(0,4)+"/"+rollNo+"/TokenId").setValue(token);
-                    }
-                });
+                            // Get new Instance ID token
+                            String token = task.getResult().getToken();
+                            dbRef.child(rollNo.substring(0, 4) + "/" + rollNo + "/TokenId").setValue(token);
+                        }
+                    });
+        }
     }
 
 }

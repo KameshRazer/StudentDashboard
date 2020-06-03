@@ -72,13 +72,13 @@ public class TotalMarkActivity extends AppCompatActivity {
         progressDialog.show();
         if(!rollNo.equals("Error")){
             dbRef = FirebaseDatabase.getInstance().getReference().child("Marks/"+rollNo.substring(0,4)+"/Result/"+rollNo);
-            System.out.println(rollNo);
             dbRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    semArray.clear();
+                    semArray.add("Select Semester");
                     for(DataSnapshot ds : dataSnapshot.getChildren()){
                         semArray.add(ds.getKey());
-//                        System.out.println(semArray);
                     }
                     semAdapter.notifyDataSetChanged();
                     progressDialog.dismiss();
@@ -91,8 +91,8 @@ public class TotalMarkActivity extends AppCompatActivity {
             });
 
         }else{
-            Toast.makeText(getApplicationContext(),"Roll Number Error",Toast.LENGTH_LONG).show();
             progressDialog.dismiss();
+            Toast.makeText(getApplicationContext(),"Roll Number Error",Toast.LENGTH_LONG).show();
         }
     }
     class CreateSemResult implements AdapterView.OnItemSelectedListener

@@ -66,6 +66,8 @@ public class MarkActivity extends AppCompatActivity {
         dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                testList.clear();
+                testList.add("Select Test");
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
                     if(!ds.getKey().equals("Result"))
                     testList.add(ds.getKey());

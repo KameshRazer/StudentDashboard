@@ -45,7 +45,7 @@ public class AttendanceAdapter extends RecyclerView.Adapter<AttendanceAdapter.Vi
             totHours.setText(String.valueOf((int)hour));
             totPresent.setText(String.valueOf((int)present));
 //            precentage.setText((present/hour)*100);
-        System.out.println((present/hour));
+//        System.out.println((present/hour));
         precentage.setText(String.valueOf((int)((present/hour)*100.0)));
 
     }

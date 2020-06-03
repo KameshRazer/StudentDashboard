@@ -6,6 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".class_time_table">
 
+    <Button
+        android:id="@+id/back5"
+        android:layout_width="102dp"
+        android:layout_height="92dp"
+        android:background="@drawable/left"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/time_table"
         android:layout_width="match_parent"

@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -38,8 +39,10 @@ public class MarkActivity extends AppCompatActivity {
     SharedPreferences logInfo;
 //    String rollNo;
     ArrayList<ArrayList<String>> dataList = new ArrayList<>();
+    ArrayList<String> testList = new ArrayList<>();
     MarkAdapter markAdapter;
-
+    ArrayAdapter testAdapter;
+    DatabaseReference dbRef;
     Button btnmenu;
     String rollNo;
 
@@ -55,8 +58,26 @@ public class MarkActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         selected.setOnItemSelectedListener(new ItemSelected(rollNo));
 
+        testAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,testList);
+        testAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        selected.setAdapter(testAdapter);
 
+        dbRef = FirebaseDatabase.getInstance().getReference().child("Marks/"+rollNo.substring(0,4));
+        dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot ds : dataSnapshot.getChildren()){
+                    if(!ds.getKey().equals("Result"))
+                    testList.add(ds.getKey());
+                }
+                testAdapter.notifyDataSetChanged();
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         markAdapter = new MarkAdapter(dataList);
         recyclerView.setAdapter(markAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

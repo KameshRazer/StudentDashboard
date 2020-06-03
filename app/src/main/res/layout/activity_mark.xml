@@ -22,7 +22,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:layout_marginLeft="90dp"
-            android:entries="@array/selected"
             android:padding="5dp" />
 
         <androidx.recyclerview.widget.RecyclerView

@@ -33,6 +33,7 @@
         android:layout_below="@+id/title"
         android:textSize="20sp"
         android:visibility="gone"
+        android:textColor="@android:color/black"
         android:layout_marginLeft="90dp"
         android:layout_toEndOf="@+id/title1" />
     <TextView
@@ -55,6 +56,7 @@
         android:layout_below="@+id/title1"
         android:textSize="20sp"
         android:visibility="gone"
+        android:textColor="@android:color/black"
         android:layout_marginLeft="90dp"
         android:layout_toEndOf="@+id/title1" />
     <TextView
@@ -78,6 +80,7 @@
         android:layout_below="@+id/title2"
         android:textSize="20sp"
         android:visibility="gone"
+        android:textColor="@android:color/black"
         android:layout_toEndOf="@+id/title1" />
     <TextView
         android:id="@+id/title4"
@@ -100,6 +103,7 @@
         android:layout_marginLeft="90dp"
         android:textSize="20sp"
         android:visibility="gone"
+        android:textColor="@android:color/black"
         android:layout_toEndOf="@+id/title1" />
     <TextView
         android:id="@+id/title5"
@@ -120,6 +124,7 @@
         android:layout_toRightOf="@+id/title1"
         android:layout_below="@+id/title4"
         android:textSize="20sp"
+        android:textColor="@android:color/black"
         android:layout_marginLeft="90dp"
         android:visibility="gone"
         android:layout_toEndOf="@+id/title1" />
@@ -143,6 +148,7 @@
         android:layout_below="@+id/title5"
         android:layout_marginLeft="90dp"
         android:textSize="20sp"
+        android:textColor="@android:color/black"
         android:visibility="gone"
         android:layout_toEndOf="@+id/title1" />
 

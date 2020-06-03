@@ -1,13 +1,4 @@
 <resources>
-    <string name="app_name">Dash</string>
-    <string-array name="selected">
-        <item>Select</item>
-        <item>CA Test</item>
-        <item>Tutorial Test</item>
-        <item>Assignment Presentation</item>
-        <item>Lab Test</item>
-        <item>Mini Project</item>
-        <item>Total</item>
-    </string-array>
+    <string name="app_name">PSG Students Dashboard</string>
     <string name="channel_id">fcm001</string>
 </resources>

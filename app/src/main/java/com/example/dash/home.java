@@ -1,8 +1,5 @@
 package com.example.dash;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
@@ -19,7 +16,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -32,7 +31,7 @@ import com.squareup.picasso.Picasso;
 
 public class home extends AppCompatActivity {
 
-    Button btnmenu,circular,ecamp,so;
+    Button btnmenu,changepass,ecamp,so;
     RelativeLayout maincontent;
     LinearLayout mainmenu;
     Animation fromtop,frombottom;
@@ -50,7 +49,7 @@ public class home extends AppCompatActivity {
 
         //Button
         btnmenu =  findViewById(R.id.btnmenu);
-        circular =  findViewById(R.id.circular);
+        changepass =  findViewById(R.id.changepass);
 
         ecamp =  findViewById(R.id.ecamp);
         so =  findViewById(R.id.so);
@@ -122,7 +121,7 @@ public class home extends AppCompatActivity {
                 maincontent.animate().translationX(0);
                 mainmenu.animate().translationX(0);
 
-                circular.startAnimation(frombottom);
+                changepass.startAnimation(frombottom);
 
                 ecamp.startAnimation(frombottom);
                 so.startAnimation(frombottom);
@@ -171,12 +170,22 @@ public class home extends AppCompatActivity {
             }
         });
 
-        circular.setOnClickListener(new View.OnClickListener() {
+        changepass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(home.this,CircularActivity.class));
+                Intent intent=new Intent(Intent.ACTION_SEND);
+                String[] recipients={"ramukuttytheiva@gmail.com"};
+                intent.putExtra(Intent.EXTRA_EMAIL, recipients);
+                intent.putExtra(Intent.EXTRA_SUBJECT,"Password Change Request");
+                intent.putExtra(Intent.EXTRA_TEXT,"Enter Old Password: \nEnter New Password:");
+                intent.putExtra(Intent.EXTRA_CC,"ramukuttytheiva@gmail.com");
+                intent.setType("text/html");
+                intent.setPackage("com.google.android.gm");
+                startActivity(Intent.createChooser(intent, "Send mail"));
             }
         });
+
+
         resultImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

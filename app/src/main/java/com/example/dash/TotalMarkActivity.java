@@ -7,12 +7,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -36,6 +38,7 @@ public class TotalMarkActivity extends AppCompatActivity {
     ArrayList<String> semArray = new ArrayList<>();
     ArrayAdapter semAdapter;
     String rollNo;
+    Button back4;
     TotalMarkAdapter dataAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,7 @@ public class TotalMarkActivity extends AppCompatActivity {
         logInfo = getSharedPreferences("LogInfo",MODE_PRIVATE);
         rollNo = logInfo.getString("RollNo","Error");
 
+        back4 = findViewById(R.id.back4);
 //        semArray.add("Select");
         dataAdapter = new TotalMarkAdapter(dataList);
         recyclerView.setAdapter(dataAdapter);
@@ -58,7 +62,13 @@ public class TotalMarkActivity extends AppCompatActivity {
         semAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         semester.setAdapter(semAdapter);
         semester.setOnItemSelectedListener(new CreateSemResult());
-
+        back4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mark = new Intent(TotalMarkActivity.this,home.class);
+                startActivity(mark);
+            }
+        });
         progressDialog.show();
         if(!rollNo.equals("Error")){
             dbRef = FirebaseDatabase.getInstance().getReference().child("Marks/"+rollNo.substring(0,4)+"/Result/"+rollNo);

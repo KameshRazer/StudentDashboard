@@ -41,7 +41,7 @@
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:layout_marginLeft="-5dp"
+            android:layout_marginLeft="15dp"
             android:text="TotHours"
             android:textColor="@color/colorPrimaryDark"
             android:gravity="center_horizontal" />
@@ -50,6 +50,7 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:textAlignment="center"
+            android:layout_marginLeft="10dp"
             android:text="TotPresent"
             android:textColor="@color/colorPrimaryDark"
             android:gravity="center_horizontal" />
@@ -58,8 +59,8 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:text="Percentage"
-            android:layout_marginLeft="-5dp"
+            android:text="%"
+            android:layout_marginLeft="-20dp"
             android:textColor="@color/colorPrimaryDark"
             android:gravity="center_horizontal" />
     </LinearLayout>
